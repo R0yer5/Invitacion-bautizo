@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Bautizo - A&S</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Todo el diseño (CSS) incrustado -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            /* Fondo: El blanco solo cubre el 15% central y el celeste abunda hacia los bordes */
+            background: radial-gradient(circle at 50% 50%, #ffffff 15%, #d4e6f1 55%, #abcbe0 100%);
+            font-family: 'Lato', sans-serif;
+        }
+
+        .font-playfair { font-family: 'Playfair Display', serif; }
+
+        /* --- SOBRE BLANCO PURO --- */
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background-color: #ffffff; 
+            /* Sombra azulada sutil */
+            box-shadow: 0 15px 35px rgba(26, 54, 93, 0.15), 0 5px 15px rgba(26, 54, 93, 0.05);
+            border-radius: 4px;
+            animation: float 4s ease-in-out infinite;
+            margin: 0 auto; 
+        }
+
+        /* --- SOLAPAS DEL SOBRE --- */
+        .flap {
+            position: absolute;
+            border-style: solid;
+        }
+
+        .left-flap {
+            top: 0;
+            left: 0;
+            border-width: 110px 160px 110px 0;
+            border-color: transparent #f4f5f7 transparent transparent; 
+            z-index: 1;
+        }
+
+        .right-flap {
+            top: 0;
+            right: 0;
+            border-width: 110px 0 110px 160px;
+            border-color: transparent transparent transparent #f8f9fa;
+            z-index: 1;
+        }
+
+        .bottom-flap {
+            bottom: 0;
+            left: 0;
+            border-width: 0 160px 110px 160px;
+            border-color: transparent transparent #ffffff transparent;
+            z-index: 2;
+            filter: drop-shadow(0 -2px 5px rgba(0,0,0,0.05));
+        }
+
+        .top-flap {
+            top: 0;
+            left: 0;
+            border-width: 115px 160px 0 160px;
+            border-color: #ffffff transparent transparent transparent; 
+            z-index: 3;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        /* --- BOTÓN MELLIZOS (Celeste y Rosa) --- */
+        .seal-button {
+            position: absolute;
+            top: 115px; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #a8d5e2 0%, #f4b6c2 100%);
+            border-radius: 50%;
+            z-index: 4; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2), inset 0 2px 5px rgba(255,255,255,0.5);
+            border: 2px solid rgba(255,255,255,0.8);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            animation: pulse 2.5s infinite;
+        }
+
+        .seal-button:hover {
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        .seal-button span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+            letter-spacing: -1px;
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(168, 213, 226, 0.7), 0 4px 10px rgba(0,0,0,0.2); }
+            70% { box-shadow: 0 0 0 15px rgba(168, 213, 226, 0), 0 4px 10px rgba(0,0,0,0.2); }
+            100% { box-shadow: 0 0 0 0 rgba(168, 213, 226, 0), 0 4px 10px rgba(0,0,0,0.2); }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen relative w-full overflow-hidden">
+
+    <!-- TÍTULO: Usamos text-[#1a365d] de Tailwind para evitar el 'style' -->
+    <h1 class="absolute top-16 md:top-24 font-playfair text-3xl md:text-4xl tracking-[0.3em] text-center uppercase drop-shadow-sm text-[#1a365d]">
+        Nuestro Bautizo
+    </h1>
+
+    <!-- EL SOBRE -->
+    <div class="envelope mt-10">
+        <div class="flap left-flap"></div>
+        <div class="flap right-flap"></div>
+        <div class="flap bottom-flap"></div>
+        <div class="flap top-flap"></div>
+        
+        <a href="invitacion.html" class="seal-button" aria-label="Abrir invitación">
+            <span>A&S</span>
+        </a>
+    </div>
+    
+    <!-- TEXTO INFERIOR: Usamos text-[#a8896c] de Tailwind para evitar el 'style' -->
+    <p class="absolute bottom-12 font-lato tracking-widest text-sm uppercase font-semibold text-[#a8896c]">
+        Toca el sello para abrir
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+/* Importación de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700&display=swap');
+
+.font-playfair { font-family: 'Playfair Display', serif; }
+.font-lato { font-family: 'Lato', sans-serif; }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #E6E2D8 !important; /* Forzamos el color de fondo */
+}
+
+/* --- FONDO MARFIL CON ROMBOS --- */
+.paper-bg {
+    background-color: #E6E2D8 !important; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath fill='%23C7C2B5' fill-opacity='0.4' d='M20 5 L35 20 L20 35 L5 20 Z' /%3E%3C/svg%3E") !important;
+    background-size: 50px 50px;
+}
+
+/* --- SOBRE BLANCO --- */
+.envelope {
+    position: relative;
+    width: 320px;
+    height: 220px;
+    background-color: #ffffff; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.08);
+    border-radius: 4px;
+    animation: float 4s ease-in-out infinite;
+}
+
+/* --- SOLAPAS DEL SOBRE --- */
+.flap {
+    position: absolute;
+    border-style: solid;
+}
+
+.left-flap {
+    top: 0;
+    left: 0;
+    border-width: 110px 160px 110px 0;
+    border-color: transparent #f4f4f4 transparent transparent; 
+    z-index: 1;
+}
+
+.right-flap {
+    top: 0;
+    right: 0;
+    border-width: 110px 0 110px 160px;
+    border-color: transparent transparent transparent #f9f9f9;
+    z-index: 1;
+}
+
+/* SOLAPA INFERIOR: Brillo Celeste (Niño) */
+.bottom-flap {
+    bottom: 0;
+    left: 0;
+    border-width: 0 160px 110px 160px;
+    border-color: transparent transparent #ffffff transparent;
+    z-index: 2;
+    /* Difuminado Celeste hacia arriba */
+    filter: drop-shadow(0px -5px 10px rgba(135, 206, 235, 0.7));
+}
+
+/* SOLAPA SUPERIOR: Brillo Rosa (Niña) */
+.top-flap {
+    top: 0;
+    left: 0;
+    border-width: 115px 160px 0 160px;
+    border-color: #ffffff transparent transparent transparent; 
+    z-index: 3;
+    /* Difuminado Rosa hacia abajo */
+    filter: drop-shadow(0px 5px 10px rgba(255, 182, 193, 0.7));
+}
+
+/* --- BOTÓN MELLIZOS --- */
+.seal-button {
+    position: absolute;
+    top: 115px; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #a8d5e2 0%, #f4b6c2 100%);
+    border-radius: 50%;
+    z-index: 4; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2), inset 0 2px 5px rgba(255,255,255,0.5);
+    border: 2px solid rgba(255,255,255,0.8);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    animation: pulse 2.5s infinite;
+}
+
+.seal-button:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+.seal-button span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+    letter-spacing: -1px;
+}
+
+/* --- ANIMACIONES --- */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(244, 182, 194, 0.7), 0 4px 10px rgba(0,0,0,0.2); }
+    70% { box-shadow: 0 0 0 15px rgba(244, 182, 194, 0), 0 4px 10px rgba(0,0,0,0.2); }
+    100% { box-shadow: 0 0 0 0 rgba(244, 182, 194, 0), 0 4px 10px rgba(0,0,0,0.2); }
+}
