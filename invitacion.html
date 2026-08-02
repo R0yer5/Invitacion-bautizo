@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700&family=Fredoka:wght@400;500;600&display=swap');
+        /* Fuentes: Lato, Playfair, Fredoka (Nombres) y Great Vibes (Caligrafía nueva para padrinos) */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:ital,wght@0,300;0,400;0,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700&family=Fredoka:wght@400;500;600&display=swap');
 
         body, html {
             margin: 0;
@@ -24,6 +25,7 @@
 
         .font-playfair { font-family: 'Playfair Display', serif; }
         .font-names { font-family: 'Fredoka', sans-serif; }
+        .font-caligraphy { font-family: 'Great Vibes', cursive; } /* Nueva clase de caligrafía elegante */
 
         .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
         @keyframes fadeInUp {
@@ -58,9 +60,9 @@
 </head>
 <body class="flex justify-center min-h-screen py-8 px-4 overflow-hidden">
 
-    <!-- === AUDIO DE FONDO (Ruta ajustada a carpeta img) === -->
-    <audio id="bgMusic" loop>
-        <source src="img/musica.mp3" type="audio/mpeg">
+    <!-- === AUDIO DE FONDO === -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="imagen/musica.mp3" type="audio/mpeg">
     </audio>
 
     <!-- === VENTANA FLOTANTE === -->
@@ -86,16 +88,16 @@
             Te invitamos al bautizo de nuestros<br>hijos
         </p>
 
-        <!-- CARRUSEL DE FOTOS (Rutas ajustadas a carpeta img) -->
+        <!-- CARRUSEL DE FOTOS -->
         <div class="w-11/12 mb-8 relative group">
             <div class="relative w-full h-72 md:h-80 rounded-2xl overflow-hidden shadow-sm border-4 border-[#FCF9F2]">
                 
                 <div id="carousel-track" class="flex w-full h-full transition-transform duration-500 ease-out">
-                    <img src="./img/img1.jpeg" alt="Foto 1" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="./img/img2.jpeg" alt="Foto 2" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="./img/img3.jpeg" alt="Foto 3" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="./img/img4.jpeg" alt="Foto 4" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="./img/img 5.jpeg" alt="Foto 5" class="w-full h-full object-cover flex-shrink-0">
+                    <img src="imagen/img1.jpeg" alt="Foto 1 de los mellizos" class="w-full h-full object-cover flex-shrink-0" onerror="this.src='https://via.placeholder.com/400x500?text=Error+en+img1.jpeg'">
+                    <img src="imagen/img2.jpeg" alt="Foto 2 de los mellizos" class="w-full h-full object-cover flex-shrink-0" onerror="this.src='https://via.placeholder.com/400x500?text=Error+en+img2.jpeg'">
+                    <img src="imagen/img3.jpeg" alt="Foto 3 de los mellizos" class="w-full h-full object-cover flex-shrink-0" onerror="this.src='https://via.placeholder.com/400x500?text=Error+en+img3.jpeg'">
+                    <img src="imagen/img4.jpeg" alt="Foto 4 de los mellizos" class="w-full h-full object-cover flex-shrink-0" onerror="this.src='https://via.placeholder.com/400x500?text=Error+en+img4.jpeg'">
+                    <img src="imagen/img%205.jpeg" alt="Foto 5 de los mellizos" class="w-full h-full object-cover flex-shrink-0" onerror="this.src='https://via.placeholder.com/400x500?text=Error+en+img+5.jpeg'">
                 </div>
                 
                 <button aria-label="Ver foto anterior" onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1a365d] w-8 h-8 rounded-full flex items-center justify-center shadow transition-colors z-10">
@@ -161,6 +163,34 @@
             </div>
         </div>
 
+        <!-- === NUEVA SECCIÓN: PADRES Y PADRINOS === -->
+        <div class="w-11/12 bg-[#FCF9F2] rounded-2xl border border-[#EAE0C8] p-6 shadow-sm mb-12 text-center">
+            
+            <!-- Padres -->
+            <h3 class="font-caligraphy text-4xl text-[#a8896c] mb-2">Nuestros Padres</h3>
+            <p class="font-names text-[#1a365d] text-[15px] mb-8 leading-relaxed">
+                Daniel R. Ovalle Anchaya <br> <span class="text-[#a8896c] text-lg">&amp;</span> <br> Dubaly V. Quispe Urquizo
+            </p>
+
+            <!-- Padrinos de Bautizo -->
+            <h3 class="font-caligraphy text-4xl text-[#a8896c] mb-2">Nuestros Padrinos de Bautizo</h3>
+            <p class="font-names text-[#1a365d] text-[15px] mb-8 leading-relaxed">
+                Jhulian A. Quispe Valles <br> <span class="text-[#a8896c] text-lg">&amp;</span> <br> Yandir Ovalle Anchaya
+            </p>
+
+            <!-- Padrinos de Corte -->
+            <h3 class="font-caligraphy text-4xl text-[#a8896c] mb-2">Nuestros Padrinos de Corte</h3>
+            <p class="font-names text-[#1a365d] text-[15px] mb-4 leading-relaxed">
+                Marleny Urquizo Villacorta <br> <span class="text-[#a8896c] text-lg">&amp;</span> <br> Brisson Garcia Montesinos
+            </p>
+            <p class="font-names text-[#1a365d] text-[15px] leading-relaxed">
+                Eshia M. S. Quispe Urquizo <br> <span class="text-[#a8896c] text-lg">&amp;</span> <br> Royer S. Villagra Pillpa
+            </p>
+            
+        </div>
+        <!-- === FIN SECCIÓN PADRES Y PADRINOS === -->
+
+        <!-- TARJETAS DE UBICACIÓN -->
         <div class="w-11/12 grid grid-cols-2 gap-4">
             <div class="flip-card perspective-1000 cursor-pointer h-52" onclick="this.classList.toggle('flipped')">
                 <div class="flipper relative w-full h-full transition-transform duration-700 transform-style-3d">
@@ -226,7 +256,12 @@
         bgMusic.volume = 0.5;
 
         startMusicBtn.addEventListener('click', () => {
-            bgMusic.play().catch(error => console.log("Audio bloqueado o ruta incorrecta:", error));
+            bgMusic.play().then(() => {
+                console.log("Música reproduciéndose con éxito.");
+            }).catch(error => {
+                console.log("Audio bloqueado por el navegador o ruta incorrecta:", error);
+            });
+            
             musicModal.classList.add('opacity-0');
             setTimeout(() => {
                 musicModal.style.display = 'none';
