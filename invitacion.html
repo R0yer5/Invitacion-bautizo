@@ -26,7 +26,7 @@
         .font-playfair { font-family: 'Playfair Display', serif; }
         .font-names { font-family: 'Fredoka', sans-serif; }
 
-        /* Efecto de entrada */
+        /* Efectos de animación */
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
         }
@@ -66,7 +66,34 @@
         }
     </style>
 </head>
-<body class="flex justify-center min-h-screen py-8 px-4">
+<body class="flex justify-center min-h-screen py-8 px-4 overflow-hidden">
+
+    <!-- === AUDIO DE FONDO === -->
+    <audio id="bgMusic" loop>
+        <source src="./img/musica" type="audio/mpeg">
+    </audio>
+
+    <!-- === VENTANA FLOTANTE (MODAL) DE MÚSICA === -->
+    <div id="music-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-700">
+        <div class="bg-[#FCF9F2] p-8 rounded-3xl shadow-2xl text-center max-w-sm mx-4 border-[3px] border-[#EAE0C8] transform scale-100 transition-transform duration-500">
+            
+            <!-- Círculo decorativo con icono -->
+            <div class="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center shadow-inner mb-5 border border-[#EAE0C8]">
+                <i class="fa-solid fa-volume-high text-3xl text-[#a8896c]"></i>
+            </div>
+            
+            <h3 class="font-playfair text-2xl font-bold text-[#1a365d] mb-2">¡Bienvenidos!</h3>
+            <p class="font-lato text-gray-500 text-sm mb-8 leading-relaxed">
+                Te recomendamos aumentar el volumen de tu dispositivo para disfrutar de la experiencia completa.
+            </p>
+            
+            <button id="start-music-btn" class="w-full bg-[#1a365d] text-white font-bold py-3.5 px-8 rounded-xl hover:bg-blue-900 transition-colors shadow-lg tracking-widest text-xs uppercase">
+                Entrar a la invitación
+            </button>
+        </div>
+    </div>
+    <!-- === FIN VENTANA FLOTANTE === -->
+
 
     <!-- CONTENEDOR PRINCIPAL -->
     <main class="w-full max-w-md bg-white overflow-hidden fade-in-up relative pb-10 flex flex-col items-center">
@@ -76,39 +103,33 @@
             Te invitamos al bautizo de nuestros<br>hijos
         </p>
 
-        <!-- CARRUSEL DE FOTOS (5 Fotos misma medida) -->
+        <!-- CARRUSEL DE FOTOS -->
         <div class="w-11/12 mb-8 relative group">
-            <!-- Contenedor principal del carrusel con borde elegante -->
             <div class="relative w-full h-72 md:h-80 rounded-2xl overflow-hidden shadow-sm border-4 border-[#FCF9F2]">
                 
-                <!-- Pista deslizante -->
                 <div id="carousel-track" class="flex w-full h-full transition-transform duration-500 ease-out">
-                    <!-- Asegúrate de tener estas 5 imágenes en tu carpeta "img" -->
-                    <img src="./img/img1.jpeg" alt="Foto 1" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="./img/img2.jpeg" alt="Foto 2" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="./img/img3.jpeg" alt="Foto 3" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="./img/img4.jpeg" alt="Foto 4" class="w-full h-full object-cover flex-shrink-0">
-                    <img src="./img/img 5.jpeg" alt="Foto 5" class="w-full h-full object-cover flex-shrink-0">
+                    <img src="./img/foto1.jpg" alt="Foto 1 de los mellizos" class="w-full h-full object-cover flex-shrink-0">
+                    <img src="./img/foto2.jpg" alt="Foto 2 de los mellizos" class="w-full h-full object-cover flex-shrink-0">
+                    <img src="./img/foto3.jpg" alt="Foto 3 de los mellizos" class="w-full h-full object-cover flex-shrink-0">
+                    <img src="./img/foto4.jpg" alt="Foto 4 de los mellizos" class="w-full h-full object-cover flex-shrink-0">
+                    <img src="./img/foto5.jpg" alt="Foto 5 de los mellizos" class="w-full h-full object-cover flex-shrink-0">
                 </div>
                 
-                <!-- Botón Anterior -->
-                <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1a365d] w-8 h-8 rounded-full flex items-center justify-center shadow transition-colors z-10">
-                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                <button aria-label="Ver foto anterior" onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1a365d] w-8 h-8 rounded-full flex items-center justify-center shadow transition-colors z-10">
+                    <i class="fa-solid fa-chevron-left text-xs" aria-hidden="true"></i>
                 </button>
                 
-                <!-- Botón Siguiente -->
-                <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1a365d] w-8 h-8 rounded-full flex items-center justify-center shadow transition-colors z-10">
-                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                <button aria-label="Ver foto siguiente" onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#1a365d] w-8 h-8 rounded-full flex items-center justify-center shadow transition-colors z-10">
+                    <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
                 </button>
             </div>
             
-            <!-- Puntos indicadores inferiores -->
             <div class="flex justify-center gap-2 mt-3" id="carousel-dots">
-                <button onclick="goToSlide(0)" class="w-2 h-2 rounded-full bg-[#1a365d] transition-colors"></button>
-                <button onclick="goToSlide(1)" class="w-2 h-2 rounded-full bg-[#EAE0C8] transition-colors"></button>
-                <button onclick="goToSlide(2)" class="w-2 h-2 rounded-full bg-[#EAE0C8] transition-colors"></button>
-                <button onclick="goToSlide(3)" class="w-2 h-2 rounded-full bg-[#EAE0C8] transition-colors"></button>
-                <button onclick="goToSlide(4)" class="w-2 h-2 rounded-full bg-[#EAE0C8] transition-colors"></button>
+                <button aria-label="Ir a la foto 1" onclick="goToSlide(0)" class="w-2 h-2 rounded-full bg-[#1a365d] transition-colors"></button>
+                <button aria-label="Ir a la foto 2" onclick="goToSlide(1)" class="w-2 h-2 rounded-full bg-[#EAE0C8] transition-colors"></button>
+                <button aria-label="Ir a la foto 3" onclick="goToSlide(2)" class="w-2 h-2 rounded-full bg-[#EAE0C8] transition-colors"></button>
+                <button aria-label="Ir a la foto 4" onclick="goToSlide(3)" class="w-2 h-2 rounded-full bg-[#EAE0C8] transition-colors"></button>
+                <button aria-label="Ir a la foto 5" onclick="goToSlide(4)" class="w-2 h-2 rounded-full bg-[#EAE0C8] transition-colors"></button>
             </div>
         </div>
 
@@ -118,9 +139,9 @@
                 Salvador
             </h1>
             <div class="flex items-center justify-center gap-10 my-1">
-                <i class="fa-solid fa-dove text-[#a8d5e2] text-3xl fa-flip-horizontal"></i>
+                <i class="fa-solid fa-dove text-[#a8d5e2] text-3xl fa-flip-horizontal" aria-hidden="true"></i>
                 <span class="font-playfair text-4xl text-[#a8896c]">&amp;</span>
-                <i class="fa-solid fa-dove text-[#f4b6c2] text-3xl"></i>
+                <i class="fa-solid fa-dove text-[#f4b6c2] text-3xl" aria-hidden="true"></i>
             </div>
             <h1 class="font-names text-[3.5rem] text-[#1a365d] leading-none mt-3">
                 Isabella
@@ -168,20 +189,18 @@
             <div class="flip-card perspective-1000 cursor-pointer h-52" onclick="this.classList.toggle('flipped')">
                 <div class="flipper relative w-full h-full transition-transform duration-700 transform-style-3d">
                     
-                    <!-- Frente -->
                     <div class="absolute w-full h-full bg-white border-2 border-[#a8d5e2] rounded-2xl flex flex-col justify-center items-center backface-hidden shadow-sm">
-                        <i class="fa-solid fa-church text-[3rem] text-[#1a365d]"></i>
+                        <i class="fa-solid fa-church text-[3rem] text-[#1a365d]" aria-hidden="true"></i>
                         <p class="font-playfair font-bold text-[#1a365d] text-[13px] mt-4 uppercase tracking-wider text-center">Ceremonia<br>2:00 PM</p>
-                        <p class="text-[9px] text-gray-400 mt-2 uppercase tracking-widest">Toca para girar <i class="fa-solid fa-rotate ml-1"></i></p>
+                        <p class="text-[9px] text-gray-400 mt-2 uppercase tracking-widest">Toca para girar <i class="fa-solid fa-rotate ml-1" aria-hidden="true"></i></p>
                     </div>
 
-                    <!-- Reverso -->
                     <div class="absolute w-full h-full bg-[#1a365d] rounded-2xl flex flex-col justify-center items-center backface-hidden rotate-y-180 p-3 text-center shadow-md border-2 border-[#1a365d]">
                         <h4 class="font-bold text-white text-[12px] uppercase mb-1 leading-tight">Iglesia San Pedro</h4>
                         <p class="text-gray-300 text-[9px] leading-tight mb-2">Plaza San Pedro<br>(Más arriba de la estación de tren)</p>
                         <p class="text-[#a8d5e2] text-[11px] font-semibold mb-2">2:00 PM</p>
                         <a href="https://maps.app.goo.gl/tzYPq3wJma6eYch97" target="_blank" rel="noopener noreferrer" class="mt-1 bg-white text-[#1a365d] text-[11px] font-bold px-4 py-2 rounded-full hover:bg-[#a8896c] hover:text-white transition-colors duration-300">
-                            <i class="fa-solid fa-map-location-dot mr-1"></i> Ver Mapa
+                            <i class="fa-solid fa-map-location-dot mr-1" aria-hidden="true"></i> Ver Mapa
                         </a>
                     </div>
                 </div>
@@ -191,20 +210,18 @@
             <div class="flip-card perspective-1000 cursor-pointer h-52" onclick="this.classList.toggle('flipped')">
                 <div class="flipper relative w-full h-full transition-transform duration-700 transform-style-3d">
                     
-                    <!-- Frente -->
                     <div class="absolute w-full h-full bg-white border-2 border-[#f4b6c2] rounded-2xl flex flex-col justify-center items-center backface-hidden shadow-sm">
-                        <i class="fa-solid fa-champagne-glasses text-[3rem] text-[#1a365d]"></i>
+                        <i class="fa-solid fa-champagne-glasses text-[3rem] text-[#1a365d]" aria-hidden="true"></i>
                         <p class="font-playfair font-bold text-[#1a365d] text-[13px] mt-4 uppercase tracking-wider text-center">Recepción<br>6:30 PM</p>
-                        <p class="text-[9px] text-gray-400 mt-2 uppercase tracking-widest">Toca para girar <i class="fa-solid fa-rotate ml-1"></i></p>
+                        <p class="text-[9px] text-gray-400 mt-2 uppercase tracking-widest">Toca para girar <i class="fa-solid fa-rotate ml-1" aria-hidden="true"></i></p>
                     </div>
 
-                    <!-- Reverso -->
                     <div class="absolute w-full h-full bg-[#1a365d] rounded-2xl flex flex-col justify-center items-center backface-hidden rotate-y-180 p-3 text-center shadow-md border-2 border-[#1a365d]">
                         <h4 class="font-bold text-white text-[11px] uppercase mb-1 leading-tight">Salón de Eventos Roma</h4>
                         <p class="text-gray-300 text-[9px] leading-tight mb-2">Calle Lanlacuyoc A_12<br>(Costado terminal Izcuchaca Santiago)</p>
                         <p class="text-[#f4b6c2] text-[11px] font-semibold mb-2">6:30 PM</p>
                         <a href="https://maps.app.goo.gl/jmbyGnq36YABkMyU6" target="_blank" rel="noopener noreferrer" class="mt-1 bg-white text-[#1a365d] text-[11px] font-bold px-4 py-2 rounded-full hover:bg-[#a8896c] hover:text-white transition-colors duration-300">
-                            <i class="fa-solid fa-map-location-dot mr-1"></i> Ver Mapa
+                            <i class="fa-solid fa-map-location-dot mr-1" aria-hidden="true"></i> Ver Mapa
                         </a>
                     </div>
                 </div>
@@ -215,27 +232,22 @@
         <!-- SECCIÓN INFERIOR: ELLOS, ELLAS, TODOS -->
         <div class="w-11/12 mt-10 flex justify-between items-center bg-[#FCF9F2] rounded-2xl border border-[#EAE0C8] p-5 shadow-sm">
             
-            <!-- Ellos -->
             <div class="flex flex-col items-center gap-1 w-1/3">
-                <i class="fa-solid fa-user-tie text-[22px] text-[#1a365d] mb-1"></i>
+                <i class="fa-solid fa-user-tie text-[22px] text-[#1a365d] mb-1" aria-hidden="true"></i>
                 <span class="font-playfair font-bold text-[#a8896c] uppercase tracking-widest text-[11px]">Ellos</span>
             </div>
             
-            <!-- Línea divisoria -->
             <div class="w-[1px] h-8 bg-[#EAE0C8]"></div>
             
-            <!-- Ellas -->
             <div class="flex flex-col items-center gap-1 w-1/3">
-                <i class="fa-solid fa-person-dress text-[24px] text-[#1a365d] mb-1"></i>
+                <i class="fa-solid fa-person-dress text-[24px] text-[#1a365d] mb-1" aria-hidden="true"></i>
                 <span class="font-playfair font-bold text-[#a8896c] uppercase tracking-widest text-[11px]">Ellas</span>
             </div>
 
-            <!-- Línea divisoria -->
             <div class="w-[1px] h-8 bg-[#EAE0C8]"></div>
 
-            <!-- Todos (Regalos) -->
             <div class="flex flex-col items-center gap-1 w-1/3">
-                <i class="fa-solid fa-gift text-[22px] text-[#1a365d] mb-1"></i>
+                <i class="fa-solid fa-gift text-[22px] text-[#1a365d] mb-1" aria-hidden="true"></i>
                 <span class="font-playfair font-bold text-[#a8896c] uppercase tracking-widest text-[11px]">Todos</span>
             </div>
             
@@ -243,8 +255,29 @@
 
     </main>
 
-    <!-- Scripts: Temporizador y Carrusel -->
     <script>
+        // === LÓGICA DE LA VENTANA FLOTANTE Y AUDIO ===
+        const musicModal = document.getElementById('music-modal');
+        const startMusicBtn = document.getElementById('start-music-btn');
+        const bgMusic = document.getElementById('bgMusic');
+
+        // Configurar volumen al 50% para que no sea muy agresivo al inicio
+        bgMusic.volume = 0.5;
+
+        startMusicBtn.addEventListener('click', () => {
+            // Reproducir música
+            bgMusic.play().catch(error => console.log("Audio bloqueado:", error));
+            
+            // Animación de ocultar el modal
+            musicModal.classList.add('opacity-0');
+            
+            // Permitir scroll y borrar modal después de la animación
+            setTimeout(() => {
+                musicModal.style.display = 'none';
+                document.body.classList.remove('overflow-hidden');
+            }, 700);
+        });
+
         // === LÓGICA DEL CARRUSEL ===
         let currentSlide = 0;
         const totalSlides = 5;
@@ -252,10 +285,7 @@
         const dots = document.getElementById('carousel-dots').children;
 
         function updateCarousel() {
-            // Mueve la pista deslizando las imágenes
             track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            // Actualiza los colores de los puntitos
             for (let i = 0; i < dots.length; i++) {
                 if (i === currentSlide) {
                     dots[i].className = "w-2 h-2 rounded-full bg-[#1a365d] transition-colors";
@@ -280,9 +310,7 @@
             updateCarousel();
         }
 
-        // Auto-reproducción del carrusel cada 4 segundos
         setInterval(nextSlide, 4000);
-
 
         // === LÓGICA DEL TEMPORIZADOR ===
         const fechaBautizo = new Date("August 8, 2026 14:00:00").getTime();
